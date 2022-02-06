@@ -1,0 +1,19 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "typescript.format.semicolons": "insert",
+  "javascript.format.semicolons": "insert",
+  "typescript.preferences.quoteStyle": "double",
+  "javascript.preferences.quoteStyle": "double",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "args": ["-ExecutionPolicy", "Bypass"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
+}
