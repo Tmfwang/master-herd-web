@@ -22,6 +22,7 @@ interface OptionsBarProps {
   handleSingleMapClicked: () => void;
   handleMultiMapClicked: () => void;
   handleDeleteClicked: () => void;
+  handleReportClicked: () => void;
 }
 
 const OptionsBar: React.FC<OptionsBarProps> = ({
@@ -34,6 +35,7 @@ const OptionsBar: React.FC<OptionsBarProps> = ({
   handleSingleMapClicked,
   handleMultiMapClicked,
   handleDeleteClicked,
+  handleReportClicked,
 }) => {
   return (
     <Stack
@@ -153,6 +155,7 @@ const OptionsBar: React.FC<OptionsBarProps> = ({
             color="info"
             style={{ backgroundColor: "#FFFFFF" }}
             disabled={selectedSupervisionAmount <= 0}
+            onClick={handleReportClicked}
           >
             Last ned rapport
           </Button>
