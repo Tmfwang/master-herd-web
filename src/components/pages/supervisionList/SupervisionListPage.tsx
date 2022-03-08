@@ -13,6 +13,7 @@ import OptionsBar from "./OptionsBar";
 import SupervisionList from "./SupervisionList";
 import LeafletMapSingle from "./LeafletMapInspectSupervisionsSingle";
 import LeafletMapMulti from "./LeafletMapInspectSupervisionsMulti";
+import ReportPage from "../report/ReportPage";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +44,9 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
     React.useState<boolean>(false);
 
   const [multiMapModalOpen, setMultiMapModalOpen] =
+    React.useState<boolean>(false);
+
+  const [pdfReportModalOpen, setPdfReportModalOpen] =
     React.useState<boolean>(false);
 
   const [allSupervisions, setAllSupervisions] = React.useState<
@@ -210,12 +214,18 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
                 display: "grid",
                 gridTemplateColumns: "auto auto auto",
                 gap: "20px",
-                margin: "20px"
+                margin: "20px",
               }}
             >
               {selectedSupervisions.map((supervision: supervisionType) => {
                 return (
-                  <div style={{ width: "100%", height: "400px", border: "1px solid #333333" }}>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "400px",
+                      border: "1px solid #333333",
+                    }}
+                  >
                     <LeafletMapMulti
                       supervision={supervision}
                     ></LeafletMapMulti>
@@ -224,6 +234,26 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
               })}
             </div>
           </div>
+        </div>
+      </Modal>
+      <Modal open={pdfReportModalOpen}>
+        <div
+          style={{
+            width: "100vw",
+            height: "100vh",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#FFFFFF",
+            border: "2px solid #000",
+            boxShadow: "24",
+          }}
+        >
+          <ReportPage
+            supervisions={selectedSupervisions}
+            handlePdfGenerated={() => setPdfReportModalOpen(false)}
+          ></ReportPage>
         </div>
       </Modal>
       <div
@@ -243,6 +273,7 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
           handleSingleMapClicked={() => setSingleMapModalOpen(true)}
           handleMultiMapClicked={() => setMultiMapModalOpen(true)}
           handleDeleteClicked={() => setDeleteDialogOpen(true)}
+          handleReportClicked={() => setPdfReportModalOpen(true)}
         ></OptionsBar>
         <SupervisionList
           allSupervisions={allSupervisions}

@@ -8,9 +8,7 @@ import UseRedirectToHttps from "./hooks/useRedirectToHttps";
 
 import LoginPage from "./components/pages/login/LoginPage";
 import SupervisionListPage from "./components/pages/supervisionList/SupervisionListPage";
-
-import MyDocument from "./components/pdf-report/PdfReport";
-import { PDFViewer } from "@react-pdf/renderer";
+import ReportPage from "./components/pages/report/ReportPage";
 
 function App() {
   UseRedirectToHttps();
@@ -20,17 +18,6 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/tilsynsturer" element={<SupervisionListPage />} />
-        <Route
-          path="/pdf-rapport"
-          element={
-            // <PDFViewer>
-            //   <MyDocument />
-            // </PDFViewer>
-            <div>
-              
-            </div>
-          }
-        />
       </Routes>
     </div>
   );
