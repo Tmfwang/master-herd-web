@@ -81,7 +81,6 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
         )
         .then(async (response) => {
           setAllSupervisions(response.data);
-          console.log(response.data);
         })
         .catch((e) => {});
 
@@ -205,8 +204,7 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
               backgroundColor: "#F8F8F8",
               paddingTop: "1px",
               marginTop: "-1px",
-              // display: "grid",
-              // gridTemplateColumns: "auto auto auto",
+              overflow: "auto",
             }}
           >
             <div
@@ -245,11 +243,12 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F8F8F8",
             border: "2px solid #000",
             boxShadow: "24",
           }}
         >
+          <Header></Header>
           <ReportPage
             supervisions={selectedSupervisions}
             handlePdfGenerated={() => setPdfReportModalOpen(false)}
