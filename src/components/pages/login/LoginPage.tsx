@@ -38,17 +38,6 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
     }
   }, []);
 
-  const handleVerifyLogin = async () => {
-    axios
-      .get("https://master-herd-api.herokuapp.com/supervision/")
-      .then(async (response) => {
-        alert(response.status);
-      })
-      .catch((e) => {
-        alert(e.message);
-      });
-  };
-
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -56,7 +45,6 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
     axios
       .post(
         "https://master-herd-api.herokuapp.com/user/",
-        // "http://127.0.0.1:8000/user/",
         {
           email: data.get("email")?.toString().toLowerCase(),
           full_name: data.get("fullName")?.toString(),
@@ -139,7 +127,7 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: "green" }}>
-                <LockOutlinedIcon onClick={() => handleVerifyLogin()} />
+                <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Logg inn
@@ -225,9 +213,7 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: "blue" }}>
-                <AccountCircleOutlinedIcon
-                  onClick={() => handleVerifyLogin()}
-                />
+                <AccountCircleOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Registrer ny bruker

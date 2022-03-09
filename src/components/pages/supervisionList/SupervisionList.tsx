@@ -109,6 +109,8 @@ const SupervisionList: React.FC<SupervisionListProps> = ({
       );
     }
 
+    newSelectedSupervisions.sort((a, b) => ("" + a.whenStarted).localeCompare(b.whenStarted));
+
     setSelectedSupervisions(newSelectedSupervisions);
   };
 
