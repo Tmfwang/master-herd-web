@@ -293,7 +293,7 @@ const ReportPage: React.FC<ReportPageProps> = ({
               margin: "auto",
               justifyContent: "center",
               alignContent: "center",
-              paddingTop: "200px",
+              paddingTop: "250px",
             }}
           >
             <img src={icon} width={800}></img>

@@ -117,9 +117,14 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
     });
   };
 
+  const handleLogout = () => {
+    window.sessionStorage.setItem("authToken", "");
+    navigate("/");
+  };
+
   return (
     <div style={{ width: "100%" }}>
-      <Header></Header>
+      <Header handleLogout={handleLogout}></Header>
       <Dialog
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
@@ -164,6 +169,7 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
         >
           <Header
             handleBackClicked={() => setSingleMapModalOpen(false)}
+            handleLogout={handleLogout}
           ></Header>
           <div
             style={{
@@ -196,6 +202,7 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
         >
           <Header
             handleBackClicked={() => setMultiMapModalOpen(false)}
+            handleLogout={handleLogout}
           ></Header>
           <div
             style={{
