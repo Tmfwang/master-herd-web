@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { supervisionType, fullObservationType } from "../../../types";
 
-import LeafletMapMulti from "./LeafletMapInspectSupervisionsMulti";
+import LeafletMapMulti from "./LeafletMapReportPage";
 
 import axios from "axios";
 

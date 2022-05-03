@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Checkbox } from "@mui/material";
 
 import Header from "../../shared/Header";
 import OptionsBar from "./OptionsBar";
@@ -56,6 +57,14 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
   const [selectedSupervisions, setSelectedSupervisions] = React.useState<
     supervisionType[]
   >([]);
+
+  const [singleMapSelectedSupervisions, setSingleMapSelectedSupervisions] =
+    React.useState<supervisionType[]>([]);
+
+  React.useEffect(() => {
+    setSingleMapSelectedSupervisions([...selectedSupervisions]);
+    console.log(singleMapSelectedSupervisions);
+  }, [selectedSupervisions]);
 
   React.useEffect(() => {
     const authToken = window.sessionStorage.getItem("authToken");
@@ -122,6 +131,42 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
     navigate("/");
   };
 
+  const createDateString = (dateIso: string) => {
+    const localeDateArray = new Date(dateIso)
+      .toLocaleDateString("no-no")
+      .split(".");
+
+    return (
+      // Day
+      localeDateArray[0] +
+      "/" +
+      // Month
+      localeDateArray[1] +
+      "/" +
+      // Year
+      localeDateArray[2].substring(2, 4)
+    );
+  };
+
+  const handleSingleMapSupervisionToggle = (supervision: supervisionType) => {
+    const newSelectedSupervisions = [...singleMapSelectedSupervisions];
+
+    if (!newSelectedSupervisions.includes(supervision)) {
+      newSelectedSupervisions.push(supervision);
+    } else {
+      newSelectedSupervisions.splice(
+        newSelectedSupervisions.indexOf(supervision),
+        1
+      );
+    }
+
+    newSelectedSupervisions.sort((a, b) =>
+      ("" + a.whenStarted).localeCompare(b.whenStarted)
+    );
+
+    setSingleMapSelectedSupervisions(newSelectedSupervisions);
+  };
+
   return (
     <div style={{ width: "100%" }}>
       <Header handleLogout={handleLogout}></Header>
@@ -171,17 +216,123 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
             handleBackClicked={() => setSingleMapModalOpen(false)}
             handleLogout={handleLogout}
           ></Header>
+          <div style={{ overflow: "auto" }}>
+            <div
+              style={{
+                backgroundColor: "#F8F8F8",
+                minWidth: "100%",
+                paddingTop: "1px",
+                marginTop: "-1px",
+                display: "inline-flex",
+                flexDirection: "row",
+              }}
+            >
+              {[...selectedSupervisions]
+                .sort(function (a, b) {
+                  return b.whenStarted.localeCompare(a.whenStarted);
+                })
+                .map((supervision: supervisionType) => {
+                  return (
+                    <div
+                      style={{
+                        height: "6vw",
+                        backgroundColor: "#FFFFFF",
+                        border: "1px solid #222222",
+                        margin: "5px",
+                        padding: "5px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() =>
+                        handleSingleMapSupervisionToggle(supervision)
+                      }
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          margin: "auto",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div
+                            style={{
+                              marginRight: "20px",
+                              fontWeight: "bold",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Dato:
+                          </div>
+                          <div
+                            style={{
+                              fontSize: "18px",
+                            }}
+                          >
+                            {createDateString(supervision.whenStarted)}
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div
+                            style={{
+                              marginRight: "8px",
+                              fontWeight: "bold",
+                              fontSize: "18px",
+                            }}
+                          >
+                            Observasjoner:
+                          </div>
+                          <div
+                            style={{
+                              fontSize: "18px",
+                            }}
+                          >
+                            {supervision.allObservations.length}
+                          </div>
+                        </div>
+
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            margin: "auto",
+                          }}
+                        >
+                          <Checkbox
+                            size="medium"
+                            sx={{ "& .MuiSvgIcon-root": { fontSize: 36 } }}
+                            checked={singleMapSelectedSupervisions.includes(
+                              supervision
+                            )}
+                          ></Checkbox>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
           <div
             style={{
               width: "100%",
-              height: "90%",
+              height: "75%",
               backgroundColor: "#F8F8F8",
               paddingTop: "1px",
               marginTop: "-1px",
             }}
           >
             <LeafletMapSingle
-              supervisions={selectedSupervisions}
+              supervisions={singleMapSelectedSupervisions}
             ></LeafletMapSingle>
           </div>
         </div>

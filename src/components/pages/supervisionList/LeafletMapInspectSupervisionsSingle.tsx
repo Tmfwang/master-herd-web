@@ -165,6 +165,12 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ supervisions }) => {
 
   // Draws the path that the user has walked
   useEffect(() => {
+    if (map) {
+      pathPolylines.forEach((path) => {
+        path.removeFrom(map);
+      });
+    }
+
     let newPathPolylines = [] as Polyline<any>[];
 
     supervisions.forEach((supervision: supervisionType) => {
@@ -177,7 +183,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ supervisions }) => {
           let newPolyline = L.polyline(polylinePoints, {
             weight: 6,
             stroke: true,
-            color: "black",
+            color: "#" + Math.floor(Math.random() * 16777215).toString(16),
           });
 
           newPathPolylines.push(newPolyline);
