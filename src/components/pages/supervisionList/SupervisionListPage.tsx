@@ -379,12 +379,97 @@ const SupervisionListPage: React.FC<SupervisionListPageProps> = ({}) => {
                     style={{
                       width: "100%",
                       height: "400px",
-                      border: "1px solid #333333",
                     }}
                   >
-                    <LeafletMapMulti
-                      supervision={supervision}
-                    ></LeafletMapMulti>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "32%",
+                        position: "relative",
+                        bottom: "-401px",
+                        left: "1px",
+                        paddingLeft: "5px",
+                        paddingRight: "5px",
+                        paddingBottom: "2px",
+                        zIndex: "2000",
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        borderBottomLeftRadius: "10px",
+                        borderTopRightRadius: "10px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div
+                          style={{
+                            marginRight: "20px",
+                            fontWeight: "bold",
+                            fontSize: "18px",
+                            color: "black",
+                            textShadow:
+                              "-1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF",
+                          }}
+                        >
+                          Dato:
+                        </div>
+                        <div
+                          style={{
+                            fontSize: "18px",
+                            color: "black",
+                            textShadow:
+                              "-1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF",
+                          }}
+                        >
+                          {createDateString(supervision.whenStarted)}
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div
+                          style={{
+                            marginRight: "8px",
+                            fontWeight: "bold",
+                            fontSize: "18px",
+                            color: "black",
+                            textShadow:
+                              "-1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF",
+                          }}
+                        >
+                          Observasjoner:
+                        </div>
+                        <div
+                          style={{
+                            fontSize: "18px",
+                            color: "black",
+                            textShadow:
+                              "-1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF",
+                          }}
+                        >
+                          {supervision.allObservations.length}
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "400px",
+                        border: "1px solid #333333",
+                        borderRadius: "10px",
+                        zIndex: "1000",
+                      }}
+                    >
+                      <LeafletMapMulti
+                        supervision={supervision}
+                      ></LeafletMapMulti>
+                    </div>
                   </div>
                 );
               })}
