@@ -1209,7 +1209,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ supervision }) => {
 
   return (
     <MapContainer
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", borderRadius: "10px", zIndex: "1000" }}
       // @ts-ignore
       center={[63.446827, 10.421906]}
       zoom={13}
