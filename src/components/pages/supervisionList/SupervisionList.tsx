@@ -132,7 +132,13 @@ const SupervisionList: React.FC<SupervisionListProps> = ({
         <h3>
           Du har ingen tilsynsturer.
           <br />
-          Husk å bruke Herd-appen til å laste opp tilsynsturene du har utført.
+          Husk å bruke Herd-appen til å laste opp tilsynsturene du har utført.{" "}
+          <br />
+          Du kan laste ned denne appen ved å&nbsp;
+          <a href="https://play.google.com/store/apps/details?id=herd2.app.tmfwang">
+            klikke her
+          </a>
+          .
         </h3>
       )}
 
