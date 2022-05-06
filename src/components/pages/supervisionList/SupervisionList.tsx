@@ -109,7 +109,9 @@ const SupervisionList: React.FC<SupervisionListProps> = ({
       );
     }
 
-    newSelectedSupervisions.sort((a, b) => ("" + a.whenStarted).localeCompare(b.whenStarted));
+    newSelectedSupervisions.sort((a, b) =>
+      ("" + a.whenStarted).localeCompare(b.whenStarted)
+    );
 
     setSelectedSupervisions(newSelectedSupervisions);
   };
@@ -124,49 +126,61 @@ const SupervisionList: React.FC<SupervisionListProps> = ({
 
   return (
     <div style={{ marginTop: "30px", marginBottom: "30px" }}>
-      <h3>Mine tilsynsturer</h3>
-
-      {selectedSupervisions.length < allSupervisions.length ? (
-        <div
-          style={{
-            width: "40%",
-            margin: "auto",
-            textAlign: "right",
-            paddingRight: "25px",
-            display: "flex",
-          }}
-        >
-          <div
-            style={{
-              marginLeft: "auto",
-              cursor: "pointer",
-              userSelect: "none",
-            }}
-            onClick={toggleAllMarkClicked}
-          >
-            Marker alle
-          </div>
-        </div>
+      {allSupervisions.length > 0 ? (
+        <h3>Mine tilsynsturer</h3>
       ) : (
-        <div
-          style={{
-            width: "40%",
-            margin: "auto",
-            textAlign: "right",
-            paddingRight: "0px",
-            display: "flex",
-          }}
-        >
-          <div
-            style={{
-              marginLeft: "auto",
-              cursor: "pointer",
-              userSelect: "none",
-            }}
-            onClick={toggleAllMarkClicked}
-          >
-            Fjern markeringer
-          </div>
+        <h3>
+          Du har ingen tilsynsturer.
+          <br />
+          Husk å bruke Herd-appen til å laste opp tilsynsturene du har utført.
+        </h3>
+      )}
+
+      {allSupervisions.length > 0 && (
+        <div>
+          {selectedSupervisions.length < allSupervisions.length ? (
+            <div
+              style={{
+                width: "40%",
+                margin: "auto",
+                textAlign: "right",
+                paddingRight: "25px",
+                display: "flex",
+              }}
+            >
+              <div
+                style={{
+                  marginLeft: "auto",
+                  cursor: "pointer",
+                  userSelect: "none",
+                }}
+                onClick={toggleAllMarkClicked}
+              >
+                Marker alle
+              </div>
+            </div>
+          ) : (
+            <div
+              style={{
+                width: "40%",
+                margin: "auto",
+                textAlign: "right",
+                paddingRight: "0px",
+                display: "flex",
+              }}
+            >
+              <div
+                style={{
+                  marginLeft: "auto",
+                  cursor: "pointer",
+                  userSelect: "none",
+                }}
+                onClick={toggleAllMarkClicked}
+              >
+                Fjern markeringer
+              </div>
+            </div>
+          )}
         </div>
       )}
 

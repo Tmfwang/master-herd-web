@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Snackbar from "@mui/material/Snackbar";
 
 // @ts-ignore
 import icon from "../../../assets/iconLandscape.png";
@@ -28,6 +29,7 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
   const navigate = useNavigate();
 
   const [isRegistering, setIsRegistering] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   React.useEffect(() => {
     const authToken = window.sessionStorage.getItem("authToken");
@@ -60,14 +62,11 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
         }
       )
       .then(async (response) => {
-        if (response.status === 200) {
-          alert(response.status);
-        } else {
-          alert("K" + response.status);
-        }
+        window.sessionStorage.setItem("authToken", response.data.token);
+        navigate("/tilsynsturer");
       })
       .catch((e) => {
-        alert(e.response.data.error);
+        setErrorMessage(e.response.data.error);
       });
   };
 
@@ -96,17 +95,24 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
         if (response.status === 200) {
           window.sessionStorage.setItem("authToken", response.data.token);
           navigate("/tilsynsturer");
-        } else {
-          alert("K" + response.status);
         }
       })
       .catch((e) => {
-        alert(e.response.status);
+        setErrorMessage(
+          "Noe gikk galt. Det er mulig brukeren ikke eksisterer."
+        );
       });
   };
 
   return (
     <ThemeProvider theme={theme}>
+      <Snackbar
+        style={{ zIndex: "99999999" }}
+        open={errorMessage !== ""}
+        autoHideDuration={6000}
+        onClose={() => setErrorMessage("")}
+        message={errorMessage}
+      />
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
