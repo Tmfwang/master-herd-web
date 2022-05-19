@@ -204,7 +204,7 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
             animationOut="slideOutRight"
             isVisible={isRegistering}
             animateOnMount={false}
-            style={{ marginTop: "-550px" }}
+            style={{ marginTop: "-560px" }}
           >
             <Box
               sx={{
@@ -243,15 +243,26 @@ const LoginPage: React.FC<LoginPageProps> = ({}) => {
                   autoComplete="email"
                   autoFocus
                 />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="fullName"
-                  label="Fullt Navn"
-                  id="fullName"
-                  autoComplete="name"
-                />
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="fullName"
+                    label="Fullt Navn"
+                    id="fullName"
+                    autoComplete="name"
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="municipality"
+                    label="Kommune"
+                    id="municipality"
+                    autoComplete="municipality"
+                  />
+                </div>
                 <div style={{ display: "flex", gap: "10px" }}>
                   <TextField
                     margin="normal"
