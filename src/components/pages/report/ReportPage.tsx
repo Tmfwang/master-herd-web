@@ -12,7 +12,7 @@ import axios from "axios";
 import icon from "../../../assets/icon.png";
 
 // @ts-ignore
-import Pdf from "react-to-pdf";
+import Pdf from "./ReactToPdf";
 
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
